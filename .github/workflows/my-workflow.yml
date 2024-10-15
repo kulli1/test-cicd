@@ -30,9 +30,9 @@ jobs:
     - name: Upload lambda zip to S3
       run: aws s3 cp lambda_code.zip s3://${{ env.S3_BUCKET_NAME }}/
 
-    #- name: Update Lambda Function Code
-    #  run: |
-    #    aws lambda update-function-code \
-    #      --function-name ${{ env.LAMBDA_FUNCTION_NAME }} \
-    #      --s3-bucket ${{ env.S3_BUCKET_NAME }} \
-    #      --s3-key lambda-code.zip
+    - name: Update Lambda Function Code
+      run: |
+        aws lambda update-function-code \
+          --function-name ${{ env.LAMBDA_FUNCTION_NAME }} \
+          --s3-bucket ${{ env.S3_BUCKET_NAME }} \
+          --s3-key lambda-code.zip

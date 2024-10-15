@@ -24,6 +24,7 @@ Resources:
       Subscription:
         - Endpoint: !Ref Subscription
           Protocol: email
+      ContentBasedDeduplication: true
 
 Outputs:
   TopicArn:

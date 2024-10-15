@@ -24,7 +24,7 @@ jobs:
           --parameter-overrides TopicName=cms-topic \
           --capabilities CAPABILITY_IAM
 
-    - name: Check if Lambda Code exists in S3
+    - name: Check if Lambda Code exists in S3.
       run: |
         aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/lambda_code.zip || touch_lambda_code=true
 

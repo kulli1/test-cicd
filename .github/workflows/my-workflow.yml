@@ -1,7 +1,7 @@
 name: Run Template
 on: [push]
 jobs:
-  Hello-World-Job:
+  CMS-Job:
     runs-on:
       - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
     env:
@@ -12,14 +12,16 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@v3
+      
     - name: List Files
       run: ls -R
+      
     - name: Deploying CloudFormation Templates
       run: |
         aws cloudformation deploy \
           --template-file cloudformation/my-cloudformation-template.yml \
-          --stack-name my-stack \
-          --parameter-overrides TopicName=my-new-topic \
+          --stack-name cms-cloudformation \
+          --parameter-overrides TopicName=cms-topic \
           --capabilities CAPABILITY_IAM
 
     - name: Deploying CloudFormation Lambda Templates

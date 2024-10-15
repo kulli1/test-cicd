@@ -12,8 +12,6 @@ jobs:
       run: ls -R
     - name: Change Working Directory
       run: cd cloudformation
-    - name: current working directory
-      run: pwd
     - name: Deploy CloudFormation Template
       run: |
         aws cloudformation deploy \

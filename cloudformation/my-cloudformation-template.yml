@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an SNS Topic
+
+Parameters:
+  TopicName:
+    Type: String
+    Description: The name of the SNS topic
+    Default: my-topic
+  DisplayName:
+    Type: String
+    Description: The display name for the SNS topic
+    Default: My SNS Topic
+  Subscription:
+    Type: String
+    Description: The email address to subscribe to the SNS topic
+    Default: sumith.chandrashekhar@email.com
+  DeliveryPolicy:
+    Type: String
+    Description: The delivery policy for the SNS topic
+    Default: '{"http":{"defaultHealthyRetryPolicy":{"minDelayTarget":20,"maxDelayTarget":20,"numRetries":3,"numMaxDelayRetries":0,"numNoDelayRetries":0,"numMinDelayRetries":0,"backoffFunction":"exponential"},"disableSubscriptionOverrides":false}}'
+
+Resources:
+  MyTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Ref TopicName
+      DisplayName: !Ref DisplayName
+      Subscription:
+        - Endpoint: !Ref Subscription
+          Protocol: email
+      DeliveryPolicy:
+        !Ref DeliveryPolicy
+
+Outputs:
+  TopicArn:
+    Description: The ARN of the SNS topic
+    Value: !Ref MyTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-TopicArn'
+  TopicName:
+    Description: The name of the SNS topic
+    Value: !Ref TopicName
+    Export:
+      Name: !Sub '${AWS::StackName}-TopicName'

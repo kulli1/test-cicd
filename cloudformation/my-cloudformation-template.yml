@@ -14,10 +14,6 @@ Parameters:
     Type: String
     Description: The email address to subscribe to the SNS topic
     Default: sumith.chandrashekhar@email.com
-  DeliveryPolicy:
-    Type: String
-    Description: The delivery policy for the SNS topic
-    Default: '{"http":{"defaultHealthyRetryPolicy":{"minDelayTarget":20,"maxDelayTarget":20,"numRetries":3,"numMaxDelayRetries":0,"numNoDelayRetries":0,"numMinDelayRetries":0,"backoffFunction":"exponential"},"disableSubscriptionOverrides":false}}'
 
 Resources:
   MyTopic:
@@ -28,8 +24,6 @@ Resources:
       Subscription:
         - Endpoint: !Ref Subscription
           Protocol: email
-      DeliveryPolicy:
-        !Ref DeliveryPolicy
 
 Outputs:
   TopicArn:

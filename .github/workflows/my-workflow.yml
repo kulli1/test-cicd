@@ -16,7 +16,7 @@ jobs:
     - name: List Files
       run: ls -R
       
-    - name: Deploying CloudFormation Templates
+    - name: Deploying CloudFormation Template
       run: |
         aws cloudformation deploy \
           --template-file cloudformation/my-cloudformation-template.yml \

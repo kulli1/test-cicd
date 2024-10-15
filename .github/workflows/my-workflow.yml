@@ -29,6 +29,14 @@ jobs:
           --stack-name cms-lambda \
           --capabilities CAPABILITY_IAM
 
+    - name: Check if Lambda Code exists in S3
+      run: |
+        aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/lambda_code.zip || touch_lambda_code=true
+
+    - name: Touch Lambda Code
+      if: ${{ env.touch_lambda_code == 'true' }}
+      run: touch lambda_code.zip
+
     - name: Zip Lambda Code
       run: |
         cd lambda

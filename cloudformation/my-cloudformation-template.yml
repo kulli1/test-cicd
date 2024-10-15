@@ -9,7 +9,7 @@ Parameters:
   DisplayName:
     Type: String
     Description: The display name for the SNS topic
-    Default: My SNS Topic
+    Default: Sumith's SNS Topic
   Subscription:
     Type: String
     Description: The email address to subscribe to the SNS topic

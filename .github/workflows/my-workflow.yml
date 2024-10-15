@@ -24,13 +24,6 @@ jobs:
           --parameter-overrides TopicName=cms-topic \
           --capabilities CAPABILITY_IAM
 
-    - name: Deploying CloudFormation Lambda Templates
-      run: |
-        aws cloudformation deploy \
-          --template-file cloudformation/lambda-1.yml \
-          --stack-name cms-lambda \
-          --capabilities CAPABILITY_IAM
-
     - name: Check if Lambda Code exists in S3
       run: |
         aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/lambda_code.zip || touch_lambda_code=true
@@ -47,6 +40,13 @@ jobs:
 
     - name: Upload lambda zip to S3
       run: aws s3 cp lambda_code.zip s3://${{ env.S3_BUCKET_NAME }}/
+
+    - name: Deploying CloudFormation Lambda Templates
+      run: |
+        aws cloudformation deploy \
+          --template-file cloudformation/lambda-1.yml \
+          --stack-name cms-lambda \
+          --capabilities CAPABILITY_IAM
 
     - name: Update Lambda Function Code
       run: |

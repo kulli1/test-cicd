@@ -5,11 +5,12 @@ jobs:
     runs-on:
       - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-
+    - name: Change Working Directory
+      run: cd cloudformation
     - name: Deploy CloudFormation Template
       run: |
         aws cloudformation deploy \
-          --template-file cloudformation/my-cloudformation-template.yml \
+          --template-file my-cloudformation-template.yml \
           --stack-name my-stack \
           --parameter-overrides TopicName=my-new-topic \
           --capabilities CAPABILITY_IAM

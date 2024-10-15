@@ -10,7 +10,7 @@ jobs:
       uses: actions/checkout@v3
     - name: List Files
       run: ls -R
-    - name: Deploy CloudFormation Template
+    - name: Deploy CloudFormation Templates
       run: |
         aws cloudformation deploy \
           --template-file cloudformation/my-cloudformation-template.yml \

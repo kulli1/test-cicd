@@ -21,9 +21,11 @@ jobs:
           --stack-name my-stack \
           --parameter-overrides TopicName=my-new-topic \
           --capabilities CAPABILITY_IAM
-
-    - name: Zip CloudFormation Template
-      run: zip -r lambda_code.zip lambda/
+    - name: Zip Lambda Code
+      run: |
+        cd lambda
+        zip -r ../lambda_code.zip .
+        cd ..
 
     - name: Upload lambda zip to S3
       run: aws s3 cp lambda_code.zip s3://${{ env.S3_BUCKET_NAME }}/

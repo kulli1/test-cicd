@@ -4,6 +4,9 @@ jobs:
   Hello-World-Job:
     runs-on:
       - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
+    env:
+      AWS_REGION: us-east-1
+      S3_BUCKET_NAME: sumith-dev
     steps:
 
     - name: Checkout Repository
@@ -17,3 +20,9 @@ jobs:
           --stack-name my-stack \
           --parameter-overrides TopicName=my-new-topic \
           --capabilities CAPABILITY_IAM
+
+    - name: Zip CloudFormation Template
+      run: zip -r cloudformation-template.zip cloudformation/
+
+    - name: Upload CloudFormation Template to S3
+      run: aws s3 cp cloudformation-template.zip s3://${{ env.S3_BUCKET_NAME }}/

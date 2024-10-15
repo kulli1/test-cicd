@@ -5,10 +5,11 @@ jobs:
     runs-on:
       - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-    - name: List Files
-      run: ls -R
+
     - name: Checkout Repository
       uses: actions/checkout@v3
+    - name: List Files
+      run: ls -R
     - name: Change Working Directory
       run: cd cloudformation
     - name: current working directory

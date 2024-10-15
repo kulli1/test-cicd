@@ -10,12 +10,10 @@ jobs:
       uses: actions/checkout@v3
     - name: List Files
       run: ls -R
-    - name: Change Working Directory
-      run: cd cloudformation
     - name: Deploy CloudFormation Template
       run: |
         aws cloudformation deploy \
-          --template-file my-cloudformation-template.yml \
+          --template-file ./my-cloudformation-template.yml \
           --stack-name my-stack \
           --parameter-overrides TopicName=my-new-topic \
           --capabilities CAPABILITY_IAM

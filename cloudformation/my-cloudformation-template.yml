@@ -5,7 +5,7 @@ Parameters:
   TopicName:
     Type: String
     Description: The name of the SNS topic
-    Default: my-topic
+    Default: sumith-topic
   DisplayName:
     Type: String
     Description: The display name for the SNS topic

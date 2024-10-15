@@ -1,20 +1,10 @@
-name: Deploy CloudFormation Template
-
-on:
-  push:
-    branches: [ main ]
-
+name: Run Template
+on: [push]
 jobs:
-
-  deploy:
-    runs-on: self-hosted
-    env:
-      AWS_REGION: us-east-1
-
+  Hello-World-Job:
+    runs-on:
+      - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
 
     - name: Deploy CloudFormation Template
       run: |

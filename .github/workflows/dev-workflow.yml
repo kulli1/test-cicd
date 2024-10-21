@@ -4,7 +4,8 @@ jobs:
   CMS-Job:
     runs-on:
       - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
-
+    env:
+      AWS_REGION: us-east-1
     steps:
 
     - name: Checkout Repository

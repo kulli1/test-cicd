@@ -15,6 +15,7 @@ jobs:
       run: |
         # Load environment-specific configuration
         source config/dev.env
+        echo "S3_BUCKET_NAME: $S3_BUCKET_NAME"
       
     - name: List Files
       run: ls -R

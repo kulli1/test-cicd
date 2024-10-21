@@ -4,14 +4,16 @@ jobs:
   CMS-Job:
     runs-on:
       - codebuild-cicd-cms-1-${{ github.run_id }}-${{ github.run_attempt }}
-    env:
-      AWS_REGION: us-east-1
-      S3_BUCKET_NAME: sumith-dev
-      LAMBDA_FUNCTION_NAME: HelloWorldLambda
+
     steps:
 
     - name: Checkout Repository
       uses: actions/checkout@v3
+
+    - name: Load Environment Variables
+      run: |
+        # Load environment-specific configuration
+        source config/dev.env
       
     - name: List Files
       run: ls -R
@@ -21,12 +23,12 @@ jobs:
         aws cloudformation deploy \
           --template-file cloudformation/my-cloudformation-template.yml \
           --stack-name cms-cloudformation \
-          --parameter-overrides TopicName=cms-topic \
+          --parameter-overrides TopicName=$TOPIC_NAME \
           --capabilities CAPABILITY_IAM
 
     - name: Check if Lambda Code exists in S3.
       run: |
-        aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/lambda_code.zip || touch_lambda_code=true
+        aws s3 ls s3://$S3_BUCKET_NAME/lambda_code.zip || touch_lambda_code=true
 
     - name: Touch Lambda Code
       if: ${{ env.touch_lambda_code == 'true' }}
@@ -39,7 +41,7 @@ jobs:
         cd ..
 
     - name: Upload lambda zip to S3
-      run: aws s3 cp lambda_code.zip s3://${{ env.S3_BUCKET_NAME }}/
+      run: aws s3 cp lambda_code.zip s3://$S3_BUCKET_NAME/
 
     - name: Deploying CloudFormation Lambda Templates
       run: |
@@ -51,6 +53,6 @@ jobs:
     - name: Update Lambda Function Code
       run: |
         aws lambda update-function-code \
-          --function-name ${{ env.LAMBDA_FUNCTION_NAME }} \
-          --s3-bucket ${{ env.S3_BUCKET_NAME }} \
+          --function-name $LAMBDA_FUNCTION_NAME \
+          --s3-bucket $S3_BUCKET_NAME \
           --s3-key lambda_code.zip

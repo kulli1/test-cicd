@@ -42,7 +42,7 @@ jobs:
         cd ..
 
     - name: Upload lambda zip to S3
-      run: aws s3 cp lambda_code.zip s3://$S3_BUCKET_NAME/
+      run: aws s3 cp lambda_code.zip s3://$S3_BUCKET_NAME/lambda_code.zip
 
     - name: Deploying CloudFormation Lambda Templates
       run: |

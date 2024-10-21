@@ -37,8 +37,8 @@ Outputs:
     Value: !Ref MyTopic
     Export:
       Name: !Sub '${AWS::StackName}-TopicArn'
-  TopicName:
-    Description: The name of the SNS topic
-    Value: !Ref TopicName
-    Export:
-      Name: !Sub '${AWS::StackName}-TopicName'
+  #TopicName:
+    #Description: The name of the SNS topic
+    #Value: !Ref TopicName
+    #Export:
+      #Name: !Sub '${AWS::StackName}-TopicName'

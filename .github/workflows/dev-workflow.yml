@@ -1,4 +1,4 @@
-name: Run Template
+name: Run Templates
 on:
   push:
     branches:

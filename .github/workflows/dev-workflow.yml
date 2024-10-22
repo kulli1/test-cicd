@@ -8,6 +8,14 @@ on:
       - 'cloudformation/**'
       - 'config/**'
       - 'sql/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'lambda/**'
+      - 'cloudformation/**'
+      - 'config/**'
+      - 'sql/**'
 jobs:
   CMS-Job:
     runs-on:

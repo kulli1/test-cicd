@@ -11,6 +11,8 @@ on:
   pull_request:
     branches:
       - main
+    branches-ignore:
+      - 'env-dev' # Added this line to ignore pull requests from env-dev branch
     paths:
       - 'lambda/**'
       - 'cloudformation/**'

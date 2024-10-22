@@ -19,7 +19,11 @@ jobs:
       
     - name: List Files
       run: ls -R
-      
+
+    - name: Upload sql file to S3
+      run: |
+        aws s3 cp sql/cms.sql s3://$S3_BUCKET_NAME/sql/
+        
     - name: Deploying CloudFormation Template
       run: |
         aws cloudformation deploy \

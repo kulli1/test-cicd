@@ -44,6 +44,7 @@ jobs:
 
     - name: Upload lambda zip to S3
       run: |
+        source config/dev.env
         echo "S3_BUCKET_NAME: $S3_BUCKET_NAME"
         aws s3 cp lambda_code.zip s3://$S3_BUCKET_NAME/
         

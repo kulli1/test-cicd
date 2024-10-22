@@ -25,7 +25,7 @@ jobs:
         source config/dev.env
         echo "S3_BUCKET_NAME: $S3_BUCKET_NAME"
       
-    - name: List Files
+    - name: List File
       run: ls -R
 
     - name: Upload sql file to S3

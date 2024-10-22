@@ -11,5 +11,5 @@ def lambda_handler(event, context):
     # Return a simple response
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello from Lambda - modified !')
+        'body': json.dumps('Hello from Lambda')
     }
